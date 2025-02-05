@@ -14,8 +14,94 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-       Product::factory(20)->recycle([
-                Category::all()
-            ])->create();
+        Product::create([
+            'name' => 'Meja Kayu Minimalis',
+            'code' => 'MK001',
+            'description' => 'Meja kayu minimalis dengan desain modern.',
+            'price' => 1500000,
+            'stock' => 10,
+            'category_id' => 1, // Meja
+        ]);
+
+        Product::create([
+            'name' => 'Kursi Kantor Ergonomis',
+            'code' => 'KK002',
+            'description' => 'Kursi kantor dengan desain ergonomis untuk kenyamanan.',
+            'price' => 1200000,
+            'stock' => 15,
+            'category_id' => 2, // Kursi
+        ]);
+
+        Product::create([
+            'name' => 'Lemari Pakaian 3 Pintu',
+            'code' => 'LP003',
+            'description' => 'Lemari pakaian dengan tiga pintu dan banyak ruang penyimpanan.',
+            'price' => 2500000,
+            'stock' => 8,
+            'category_id' => 3, // Lemari
+        ]);
+
+        Product::create([
+            'name' => 'Toilet Duduk Modern',
+            'code' => 'TD004',
+            'description' => 'Toilet duduk dengan desain modern dan nyaman.',
+            'price' => 1800000,
+            'stock' => 12,
+            'category_id' => 4, // Toilet
+        ]);
+
+        Product::create([
+            'name' => 'Dipan Kayu Jati',
+            'code' => 'DK005',
+            'description' => 'Dipan kayu jati yang kokoh dan elegan.',
+            'price' => 3200000,
+            'stock' => 7,
+            'category_id' => 5, // Dipan
+        ]);
+
+        Product::create([
+            'name' => 'Meja Makan Kayu',
+            'code' => 'MM006',
+            'description' => 'Meja makan kayu solid untuk keluarga.',
+            'price' => 4500000,
+            'stock' => 5,
+            'category_id' => 1, // Meja
+        ]);
+
+        Product::create([
+            'name' => 'Kursi Tamu Klasik',
+            'code' => 'KT007',
+            'description' => 'Kursi tamu dengan desain klasik dan elegan.',
+            'price' => 5000000,
+            'stock' => 6,
+            'category_id' => 2, // Kursi
+        ]);
+
+        Product::create([
+            'name' => 'Meja Kerja Minimalis',
+            'code' => 'MK008',
+            'description' => 'Meja kerja minimalis dengan desain modern.',
+            'price' => 1400000,
+            'stock' => 9,
+            'category_id' => 1, // Meja
+        ]);
+
+        Product::create([
+            'name' => 'Lemari Dapur Modern',
+            'code' => 'LD009',
+            'description' => 'Lemari dapur dengan desain modern dan praktis.',
+            'price' => 2100000,
+            'stock' => 10,
+            'category_id' => 3, // Lemari
+        ]);
+
+        Product::create([
+            'name' => 'Dipan Minimalis',
+            'code' => 'DM010',
+            'description' => 'Dipan minimalis yang cocok untuk kamar tidur modern.',
+            'price' => 900000,
+            'stock' => 20,
+            'category_id' => 5, // Dipan
+        ]);
     }
 }

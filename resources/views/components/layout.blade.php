@@ -16,7 +16,9 @@
     <link href="{{ asset('libs/fontawasome/css/sharp-thin.css') }}" rel="stylesheet" />
     <link href="{{ asset('libs/fontawasome/css/duotone-thin.css') }}" rel="stylesheet" />
     <link href="{{ asset('libs/fontawasome/css/sharp-duotone-thin.css') }}" rel="stylesheet" />
+    <link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/styles.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/myStyle.css') }}" />
     <style>
         .dt-buttons .dt-button {
             background-color: #855cf6 !important;
@@ -68,6 +70,7 @@
     <script src="{{ asset('libs/datatables/js/dataTables.js') }}"></script>
     {{-- <script src="{{ asset('libs/datatables/js/bootstrap.bundle.min.js') }}"></script> --}}
     <script src="{{ asset('libs/datatables/js/dataTables.bootstrap5.js') }}"></script>
+    <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('libs/datatables/js/dataTables.buttons.js') }}"></script>
     <script src="{{ asset('libs/datatables/js/jszip.min.js') }}"></script>
     <script src="{{ asset('libs/datatables/js/pdfmake.min.js') }}"></script>
@@ -92,7 +95,19 @@
                     }
                 }
             });
+            new DataTable('#productCheckout', {
+                scrollX: true,
+                pagingType: "simple_numbers", // Menampilkan nomor yang lebih rapat
+                lengthMenu: [10, 25, 50, 100], // Mengatur jumlah data per halaman
+                language: {
+                    paginate: {
+                        previous: "<",
+                        next: ">"
+                    }
+                }
+            });
         });
+    </script>
     </script>
     {{-- <script src="https://kit.fontawesome.com/72387f0abd.js" crossorigin="anonymous"></script> --}}
     <script src="{{ asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>

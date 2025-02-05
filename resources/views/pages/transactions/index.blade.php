@@ -1,17 +1,43 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
-    <div class="row">
-        <div class="col-sm-6">
-            <form action="">
-                <div class="mb-3">
-                    <label for="note_number" class="form-label">No Nota</label>
-                    <input type="text" class="form-control" id="note_number" value="{{ $note_number }}" readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nama Pembeli</label>
-                    <input class="form-control" id="name" />
-                </div>
-            </form>
-        </div>
-    </div>
+    <a href="/transactions/checkout" class="btn btn-success mb-4">Tambah
+        Transaksi +</a>
+    <table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nomor Nota</th>
+                <th>Pembeli</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($sales as $index => $sale)
+                <tr>
+                    <th>{{ $index + 1 }}</th>
+                    <td>{{ $sale->note_number }}</td>
+                    <td>{{ $sale->customer->name }}</td>
+                    <td>{{ $sale->created_at->format('d M Y | H:i A') }}</td>
+                    <td>{{ $sale->updated_at->format('d M Y | H:i A') }}</td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a href="/transactions/checkoutEdit/{{ $sale->id }}" class="btn btn-success">Edit</a>
+                            <a href="/saleitems/{{ $sale->id }}" class="btn btn-warning">Detail</a>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Action</th>
+            </tr>
+        </tfoot>
+    </table>
 </x-layout>

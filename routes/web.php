@@ -40,6 +40,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/saleitems/{id}', [SaleItemController::class, 'destroy'])->name('sale_item.destroy');
 
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions');
+    // Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
+    Route::get('/transactions/checkout', [TransactionController::class, 'checkout'])->name('transactions');
+    Route::get('/transactions/checkoutEdit/{id}', [TransactionController::class, 'checkoutEdit'])->name('transactions.put');
+    Route::put('/transactions/checkoutEdit/{id}', [TransactionController::class, 'transactionEdit'])->name('transaction.put');
+    Route::post('/transactions/checkout', [TransactionController::class, 'store'])->name('transactions.checkout');
 });
 
 Route::middleware(['guest'])->group(function () {
