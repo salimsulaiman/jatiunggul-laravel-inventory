@@ -2,6 +2,11 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     <a href="/transactions/checkout" class="btn btn-success mb-4">Tambah
         Transaksi +</a>
+    @if (session('successEditSaleItems'))
+        <div class="alert alert-success">
+            {{ session('successEditSaleItems') }}
+        </div>
+    @endif
     <table id="example" class="table table-striped" style="width:100%">
         <thead>
             <tr>

@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/saleitems/{id}', [SaleItemController::class, 'update'])->name('sale_item.put');
     Route::delete('/saleitems/{id}', [SaleItemController::class, 'destroy'])->name('sale_item.destroy');
 
-    Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions');
+    Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
     // Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
     Route::get('/transactions/checkout', [TransactionController::class, 'checkout'])->name('transactions');
     Route::get('/transactions/checkoutEdit/{id}', [TransactionController::class, 'checkoutEdit'])->name('transactions.put');

@@ -43,3 +43,6 @@
         padding: 8px !important;
     }
 
+    .custom-logout {
+        width: calc(100% - 2rem); /* 2rem karena 1rem di kiri dan 1rem di kanan */
+    }

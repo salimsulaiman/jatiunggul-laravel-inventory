@@ -49,13 +49,19 @@
                                                         <input type="text" id="name" name="name"
                                                             value="{{ $customer->name }}" class="form-control"
                                                             placeholder="Nama pelanggan">
+                                                        @error('name')
+                                                            <h6 class="text-danger mt-2 ms-1">{{ $message }}</h6>
+                                                        @enderror
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label for="notelp" class="form-label">No Telp</label>
-                                                        <input type="tel" id="notelp" name="notelp"
+                                                        <input type="tel" id="notelp" name="phone"
                                                             value="{{ $customer->phone }}" class="form-control"
                                                             placeholder="Nomor Telepon">
+                                                        @error('phone')
+                                                            <h6 class="text-danger mt-2 ms-1">{{ $message }}</h6>
+                                                        @enderror
                                                     </div>
 
                                                     <div class="mb-3">
@@ -63,11 +69,17 @@
                                                         <input type="email" id="email" name="email"
                                                             value="{{ $customer->email }}" class="form-control"
                                                             placeholder="Email pelanggan">
+                                                        @error('email')
+                                                            <h6 class="text-danger mt-2 ms-1">{{ $message }}</h6>
+                                                        @enderror
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label for="address" class="form-label">Alamat</label>
                                                         <textarea id="address" name="address" class="form-control" rows="4" placeholder="Alamat pelanggan">{{ $customer->address }}</textarea>
+                                                        @error('address')
+                                                            <h6 class="text-danger mt-2 ms-1">{{ $message }}</h6>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">

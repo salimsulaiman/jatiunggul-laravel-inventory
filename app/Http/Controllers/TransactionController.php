@@ -200,5 +200,7 @@ class TransactionController extends Controller
                 'price' => $productData->price,
             ]);
         }
+
+        return redirect()->route('transactions.index')->with('successEditSaleItems', 'Item berhasil disimpan!');
     }
 }

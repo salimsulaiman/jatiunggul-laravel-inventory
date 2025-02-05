@@ -64,9 +64,16 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer, String $id)
     {
         //
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'email' => 'nullable|email|max:255',
+            'address' => 'required|string',
+        ]);
         $data = [
             'name' => $request->input('name'),
-            'phone' => $request->input('notelp'),
+            'phone' => $request->input('phone'),
             'email' => $request->input('email'),
             'address' => $request->input('address'),
         ];
