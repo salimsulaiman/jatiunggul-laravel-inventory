@@ -50,7 +50,7 @@
                                     @method('delete')
                                     <input type="hidden" value="{{ $saleItem->id }}">
 
-                                    <button class="btn btn-danger" type="submit">Hapus</button>
+                                    <button class="btn btn-link" type="submit"><i class="fa-solid fa-xmark"></i></button>
                                 </form>
                             </div>
                         </td>
@@ -62,8 +62,50 @@
 
     <div class="text-end mt-4">
         <p><strong>Subtotal:</strong> @currency($sale->total_amount)</p>
-        <p class="text-success"><strong>Potongan:</strong> @currency(300000)</p>
-        <p class="fs-4 fw-bold">Total: @currency($sale->total_amount - 300000)</p>
+        <p class="text-success"><strong>Potongan:</strong> @currency($sale->discount)</p>
+        <h2 class="fw-bold">Total: @currency($sale->total_amount - $sale->discount)</h2>
+        <p class="fw-bold text-danger mt-3">Kekurangan: @currency($sale->remaining_payment)</p>
+        <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#settlement">Pelunasan</button>
+        <div class="modal fade" id="settlement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Pelunasan</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action="{{ route('transactions.settlement', ['id' => $sale->id]) }}">
+                        @csrf
+                        @method('put')
+                        <div class="modal-body px-4 text-start">
+                            <h5 class="fw-bold mb-2">No Nota: {{$sale->note_number}}</h5>
+                            <p class="mb-2 fw-bold">{{ $customer->name }}</p>
+                            <p class="mb-2">{{ $customer->phone }}</p>
+                            <p>{{ $customer->address }}</p>
+                            <h4 class="fw-bold">Total: @currency($sale->total_amount - $sale->discount)</h4>
+                            
+                            <!-- Edit Down Payment -->
+                            <div class="mb-3">
+                                <label for="down_payment" class="form-label">Total Down Payment</label>
+                                <input type="number" id="down_payment" name="down_payment" class="form-control"
+                                    placeholder="Masukkan down payment baru" value="{{ $sale->down_payment }}" min="0">
+                            </div>
+                    
+                            <!-- Sisa Pembayaran -->
+                            <div class="mb-3">
+                                <label for="remaining_payment" class="form-label">Sisa Pembayaran</label>
+                                <input type="text" id="remaining_payment" name="remaining_payment" class="form-control"
+                                    value="@currency($sale->remaining_payment)" readonly>
+                            </div>
+                        </div>
+                    
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="mt-5">

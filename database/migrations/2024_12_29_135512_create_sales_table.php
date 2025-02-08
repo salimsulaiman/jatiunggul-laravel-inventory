@@ -22,6 +22,7 @@ return new class extends Migration
             );
             $table->dateTime('sales_date')->now();
             $table->double('total_amount');
+            $table->double('discount');
             $table->double('down_payment');
             $table->double('remaining_payment')->nullable();
             $table->enum('payment_status', ['0','1'])->default('0');

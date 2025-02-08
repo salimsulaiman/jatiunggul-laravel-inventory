@@ -25,9 +25,10 @@ class SaleFactory extends Factory
             'customer_id' => Customer::factory(), // Assuming Customer has a factory
             'user_id' => User::factory(), // Assuming User has a factory
             'sales_date' => now(), // Current date and time
-            'total_amount' => fake()->randomFloat(0, 300000, 10000000), // Random amount between 100 and 10,000
+            'total_amount' => fake()->randomFloat(0, 3000000, 10000000), // Random amount between 100 and 10,000
+            'discount' => fake()->randomFloat(0, 300000, 500000), // Random amount between 100 and 10,000
             'down_payment' => fake()->randomFloat(0, 300000, 10000000), // Random down payment between 50 and 5,000
-            'remaining_payment' => fake()->optional()->randomFloat(2, 0, 5000), // Optional remaining payment
+            'remaining_payment' => fake()->randomFloat(0, 300000, 10000000), // Optional remaining payment
             'payment_status' => fake()->randomElement(['0', '1']), // Random payment status
         ];
     }

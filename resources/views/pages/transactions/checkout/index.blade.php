@@ -60,6 +60,7 @@
                             </div>
                         </div>
                     </div>
+                    <hr class="my-2">
 
                     <button type="button" class="btn btn-success" id="add-product">Tambah Produk</button>
 

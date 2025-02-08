@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Sale;
 use App\Models\SaleItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SaleItemController extends Controller
 {
@@ -75,10 +76,25 @@ class SaleItemController extends Controller
      */
     public function destroy(string $id)
     {
-        //
-        $saleItem = SaleItem::find($id);
-        $sale_id = $saleItem->sale_id;
-        SaleItem::where('id', $id)->delete($id);
+           // Temukan SaleItem yang akan dihapus
+    $saleItem = SaleItem::findOrFail($id);
+    $sale_id = $saleItem->sale_id;
+
+    // Hapus SaleItem terlebih dahulu
+    $saleItem->delete();
+
+    // Hitung ulang total_amount setelah penghapusan
+    $totalAmount = SaleItem::where('sale_id', $sale_id)
+        ->join('products', 'sale_items.product_id', '=', 'products.id')
+        ->sum(DB::raw('sale_items.quantity * products.price'));
+
+    // Perbarui data Sale
+    $sale = Sale::findOrFail($sale_id);
+    $sale->update([
+        'total_amount' => $totalAmount,
+        'remaining_payment' => $totalAmount - $sale->down_payment,
+        'payment_status' => $totalAmount == 0 ? '0' : $sale->payment_status,
+    ]);
         return redirect("saleitems/$sale_id")->with('successDelete', 'Berhasil menghapus data');
     }
 }

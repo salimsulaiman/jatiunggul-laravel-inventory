@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/transactions/checkoutEdit/{id}', [TransactionController::class, 'checkoutEdit'])->name('transactions.put');
     Route::put('/transactions/checkoutEdit/{id}', [TransactionController::class, 'transactionEdit'])->name('transaction.put');
     Route::post('/transactions/checkout', [TransactionController::class, 'store'])->name('transactions.checkout');
+    Route::put('/transactions/settlement/{id}', [TransactionController::class, 'settlement'])->name('transactions.settlement');
 });
 
 Route::middleware(['guest'])->group(function () {
