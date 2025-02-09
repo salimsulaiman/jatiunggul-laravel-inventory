@@ -27,7 +27,6 @@
                     <th>Tanggal beli</th>
                     <th>Total harga</th>
                     <th>Terbayarkan</th>
-                    <th>Kekurangan</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -40,10 +39,10 @@
                         <td>{{ $sale->sales_date }}</td>
                         <td class="w-32 truncate">@currency($sale->total_amount)</td>
                         <td class="w-32 truncate">@currency($sale->down_payment)</td>
-                        <td class="w-32 truncate">@currency($sale->remaining_payment)</td>
                         <td class="w-32 truncate">
-                            <div class="badge {{ $sale->payment_status == 0 ? 'text-bg-warning' : 'text-bg-success' }}">
-                                {{ $sale->payment_status == 0 ? 'Belum lunas' : 'Lunas' }}
+                            <div
+                                class="badge {{ $sale->payment_status == 'pending' ? 'text-bg-warning' : 'text-bg-success' }}">
+                                {{ $sale->payment_status }}
                             </div>
                         </td>
                         <td>
@@ -110,12 +109,11 @@
             <tfoot>
                 <tr>
                     <th>No</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Created</th>
-                    <th>Updated</th>
+                    <th>No nota</th>
+                    <th>Tanggal beli</th>
+                    <th>Total harga</th>
+                    <th>Terbayarkan</th>
+                    <th>Status</th>
                     <th>Action</th>
             </tfoot>
         </table>

@@ -43,7 +43,6 @@ class SaleItemController extends Controller
     {
         $saleItems = SaleItem::where('sale_id', $id)->get();
         $sale = Sale::find($id);
-        // dd($sale);
         $customer = $sale->customer;
         // dd($customer->name);
 
@@ -76,25 +75,25 @@ class SaleItemController extends Controller
      */
     public function destroy(string $id)
     {
-           // Temukan SaleItem yang akan dihapus
-    $saleItem = SaleItem::findOrFail($id);
-    $sale_id = $saleItem->sale_id;
+        // Temukan SaleItem yang akan dihapus
+        $saleItem = SaleItem::findOrFail($id);
+        $sale_id = $saleItem->sale_id;
 
-    // Hapus SaleItem terlebih dahulu
-    $saleItem->delete();
+        // Hapus SaleItem terlebih dahulu
+        $saleItem->delete();
 
-    // Hitung ulang total_amount setelah penghapusan
-    $totalAmount = SaleItem::where('sale_id', $sale_id)
-        ->join('products', 'sale_items.product_id', '=', 'products.id')
-        ->sum(DB::raw('sale_items.quantity * products.price'));
+        // Hitung ulang total_amount setelah penghapusan
+        $totalAmount = SaleItem::where('sale_id', $sale_id)
+            ->join('products', 'sale_items.product_id', '=', 'products.id')
+            ->sum(DB::raw('sale_items.quantity * products.price'));
 
-    // Perbarui data Sale
-    $sale = Sale::findOrFail($sale_id);
-    $sale->update([
-        'total_amount' => $totalAmount,
-        'remaining_payment' => $totalAmount - $sale->down_payment,
-        'payment_status' => $totalAmount == 0 ? '0' : $sale->payment_status,
-    ]);
+        // Perbarui data Sale
+        $sale = Sale::findOrFail($sale_id);
+        $sale->update([
+            'total_amount' => $totalAmount,
+            'remaining_payment' => $totalAmount - $sale->down_payment,
+            'payment_status' => $totalAmount == 0 ? '0' : $sale->payment_status,
+        ]);
         return redirect("saleitems/$sale_id")->with('successDelete', 'Berhasil menghapus data');
     }
 }

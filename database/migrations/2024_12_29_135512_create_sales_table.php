@@ -15,17 +15,18 @@ return new class extends Migration
             $table->id();
             $table->string('note_number', 9)->unique()->index();
             $table->foreignId('customer_id')->constrained(
-                table: 'customers', indexName: 'sales_customer_id'
+                table: 'customers',
+                indexName: 'sales_customer_id'
             );
             $table->foreignId('user_id')->constrained(
-                table: 'users', indexName: 'sales_user_id'
+                table: 'users',
+                indexName: 'sales_user_id'
             );
             $table->dateTime('sales_date')->now();
             $table->double('total_amount');
-            $table->double('discount');
-            $table->double('down_payment');
-            $table->double('remaining_payment')->nullable();
-            $table->enum('payment_status', ['0','1'])->default('0');
+            $table->double('discount')->default(0);
+            $table->double('down_payment')->default(0);
+            $table->enum('payment_status', ['pending', 'paid'])->default('pending');
             $table->timestamps();
         });
     }

@@ -73,10 +73,9 @@ class TransactionController extends Controller
             'user_id' => Auth::id(),
             'sales_date' => now(),
             'total_amount' => $totalAmount,
-            'discount' => 0,
+            'discount' => $request->discount,
             'down_payment' => 0,
-            'remaining_payment' => $totalAmount,
-            'payment_status' => '0',
+            'payment_status' => 'pending',
         ]);
 
         // Simpan Sale Items
@@ -209,20 +208,20 @@ class TransactionController extends Controller
         $request->validate([
             'down_payment' => 'required|numeric|min:0',
         ]);
-        
+
         // Ambil nilai pembayaran terbaru dari request
         $newPayment = $request->input('down_payment');
-        
+
         // Ambil data transaksi dari database
         $sale = Sale::findOrFail($id);
-        
+
         // Hitung ulang `remaining_payment` berdasarkan perubahan `down_payment`
         $sale->remaining_payment = max(0, $sale->total_amount - $newPayment);
         $sale->down_payment = $newPayment;
         $sale->payment_status = ($sale->down_payment >= $sale->total_amount) ? 1 : 0;
-        
+
         // Simpan perubahan
         $sale->save();
-        return redirect()->route('sale_item.show',['id' => $id])->with('successUpdate','Berhasil update data');
+        return redirect()->route('sale_item.show', ['id' => $id])->with('successUpdate', 'Berhasil update data');
     }
 }

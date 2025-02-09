@@ -62,6 +62,11 @@
                     </div>
                     <hr class="my-2">
 
+                    <div class="mb-3">
+                        <label class="form-label">Potongan:</label>
+                        <input type="number" name="discount" class="form-control">
+                    </div>
+
                     <button type="button" class="btn btn-success" id="add-product">Tambah Produk</button>
 
                     <button type="submit" class="btn btn-primary">Simpan Order</button>

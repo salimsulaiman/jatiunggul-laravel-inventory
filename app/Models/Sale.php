@@ -21,18 +21,23 @@ class Sale extends Model
         'sales_date' => 'datetime',
     ];
 
-    public function customer():BelongsTo
+    public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
     }
 
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function sale_item():HasMany
+    public function sale_item(): HasMany
     {
         return $this->hasMany(SaleItem::class);
+    }
+
+    public function payment(): HasMany
+    {
+        return $this->hasMany(payment::class);
     }
 }

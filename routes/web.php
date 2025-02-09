@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SaleItemController;
@@ -45,7 +46,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/transactions/checkoutEdit/{id}', [TransactionController::class, 'checkoutEdit'])->name('transactions.put');
     Route::put('/transactions/checkoutEdit/{id}', [TransactionController::class, 'transactionEdit'])->name('transaction.put');
     Route::post('/transactions/checkout', [TransactionController::class, 'store'])->name('transactions.checkout');
-    Route::put('/transactions/settlement/{id}', [TransactionController::class, 'settlement'])->name('transactions.settlement');
+    // Route::put('/transactions/settlement/{id}', [TransactionController::class, 'settlement'])->name('transactions.settlement');
+
+
+    Route::post('/transactions/payment', [PaymentController::class, 'store'])->name('payment.post');
 });
 
 Route::middleware(['guest'])->group(function () {

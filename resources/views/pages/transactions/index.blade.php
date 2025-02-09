@@ -15,6 +15,7 @@
                 <th>Pembeli</th>
                 <th>Created</th>
                 <th>Updated</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -26,10 +27,16 @@
                     <td>{{ $sale->customer->name }}</td>
                     <td>{{ $sale->created_at->format('d M Y | H:i A') }}</td>
                     <td>{{ $sale->updated_at->format('d M Y | H:i A') }}</td>
+                    <td class="w-32 truncate">
+                        <div
+                            class="badge {{ $sale->payment_status == 'pending' ? 'text-bg-warning' : 'text-bg-success' }}">
+                            {{ $sale->payment_status }}
+                        </div>
+                    </td>
                     <td>
                         <div class="d-flex gap-2">
                             <a href="/transactions/checkoutEdit/{{ $sale->id }}" class="btn btn-success">Edit</a>
-                            <a href="/saleitems/{{ $sale->id }}" class="btn btn-warning">Detail</a>
+                            <a href="/saleitems/{{ $sale->id }}" class="btn btn-primary">Detail</a>
                         </div>
                     </td>
                 </tr>
